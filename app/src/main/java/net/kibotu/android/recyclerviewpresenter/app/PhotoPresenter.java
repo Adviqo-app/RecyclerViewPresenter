@@ -2,6 +2,7 @@ package net.kibotu.android.recyclerviewpresenter.app;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -11,6 +12,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import net.kibotu.android.recyclerviewpresenter.BaseViewHolder;
 import net.kibotu.android.recyclerviewpresenter.Presenter;
 import net.kibotu.android.recyclerviewpresenter.PresenterAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 
@@ -43,7 +46,6 @@ public class PhotoPresenter extends Presenter<String, PhotoPresenter.ViewHolder>
     /**
      * Binding your model against your ViewHolder.
      */
-    @Override
     public void bindViewHolder(@NonNull ViewHolder viewHolder, @NonNull String item, int position) {
 
         Glide.with(viewHolder.itemView.getContext())
@@ -54,9 +56,14 @@ public class PhotoPresenter extends Presenter<String, PhotoPresenter.ViewHolder>
         viewHolder.itemView.setOnClickListener(v -> {
 
             // accessing the click listener from the adapter:
-            if (presenterAdapter.getOnItemClickListener() != null)
-                presenterAdapter.getOnItemClickListener().onItemClick(item, v, position);
+            if (getPresenterAdapter().getOnItemClickListener() != null)
+                getPresenterAdapter().getOnItemClickListener().onItemClick(item, v, position);
         });
+    }
+
+    @Override
+    public <VH extends RecyclerView.ViewHolder> void bindViewHolder(@NotNull VH viewHolder, String item, int position) {
+
     }
 
     public static class ViewHolder extends BaseViewHolder {

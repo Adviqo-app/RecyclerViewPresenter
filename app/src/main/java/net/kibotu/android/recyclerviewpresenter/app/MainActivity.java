@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
-        PresenterAdapter<String> adapter = new PresenterAdapter<>();
+        PresenterAdapter<Object> adapter = new PresenterAdapter<>();
         list.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         list.setAdapter(adapter);
 
